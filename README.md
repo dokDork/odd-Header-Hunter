@@ -20,10 +20,32 @@ The final result of the processing are two files:
 ./odd-header-hunetr.sh wildcards.txt no 
  ``` 
 
-first parameter: wildcard.txt is a file which contains target domain to be analyzed. For example it can contain:
+- first parameter: wildcard.txt is a file which contains target domain to be analyzed. For example it can contain:
  ```
 targetDomain.ctf
 myDomanin.ctf
  ```
 
-second parameter: it can be yes or no and is used to exclude the amass tool from the analysis of subdomains, which can take a long time to analyze (even if I decided to set a limit of 5 minutes of analysis for each domain)
+- second parameter: it can be yes or no and is used to exclude the amass tool from the analysis of subdomains, which can take a long time to analyze (even if I decided to set a limit of 5 minutes of analysis for each domain)
+
+
+## Command-line parameters
+```
+./odd-header-hunter.sh <wildcard file> <activate amass>
+```
+
+| Parameter | Description                          | Example       |
+|-----------|--------------------------------------|---------------|
+| `wildcard file`      | file which contains target domain  | `targetDomain.ctf`, `myDomain.ctf`, ... |
+| `activate amass`      | yes: activate amass analysis; no: do not activate amass analysis | `yes`, `no` |
+
+  
+## How to install it on Kali Linux (or Debian distribution)
+It's very simple  
+```
+cd /opt
+sudo git clone https://github.com/dokDork/odd-Header-Hunter.git
+cd odd-Header-Hunter 
+chmod 755 odd-header-hunter.sh 
+./odd-header-hunter.sh 
+```
