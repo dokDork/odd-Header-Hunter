@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# Function to check if a program is installed
+is_installed() {
+    local program="$1"
+    if command -v "$program" &> /dev/null; then
+	return 0 # Installato
+    else
+	return 1 # Non installato
+    fi
+}
+
 function usage() {
   cat << EOF
 Usage: $0 <domains_file> <use_amass>
@@ -38,14 +48,184 @@ if [[ "$use_amass" != "yes" && "$use_amass" != "no" ]]; then
   exit 1
 fi
 
+# Verify installed program
+echo ""
+echo "[i] verify installed program"
+
+# seclists
+echo ""
+program="seclists"
+printf "\n===================================\n"
+if ! is_installed "$program"; then
+	echo "[->] Installing $program..."
+	# Comando di installazione del programma
+	# Esempio: sudo apt-get install -y "$program"
+	cd /usr/share
+	sudo apt-get install $1
+else
+	echo "[i] $program is already installed."
+fi
+
+# amass
+echo ""
+program="amass"
+printf "\n===================================\n"
+if ! is_installed "$program"; then
+	echo "[->] Installing $program..."
+	# Comando di installazione del programma
+	# Esempio: sudo apt-get install -y "$program"
+	cd /usr/share
+	sudo apt-get install -y $1
+else
+	echo "[i] $program is already installed."
+fi
+
+# assetfinder
+echo ""
+program="assetfinder"
+printf "\n===================================\n"
+if ! is_installed "$program"; then
+	echo "[->] Installing $program..."
+	# Comando di installazione del programma
+	# Esempio: sudo apt-get install -y "$program"
+	go install github.com/tomnomnom/assetfinder@latest
+	sudo cp /home/kali/go/bin/assetfinder /usr/bin
+else
+	echo "[i] $program is already installed."
+fi
+
+# findomain
+echo ""
+program="findomain"
+printf "\n===================================\n"
+if ! is_installed "$program"; then
+	echo "[->] Installing $program..."
+	# Comando di installazione del programma
+	# Esempio: sudo apt-get install -y "$program"
+	go install github.com/Edu4rdSHL/findomain/v2@latest
+	sudo cp /home/kali/go/bin/findomain /usr/bin
+else
+	echo "[i] $program is already installed."
+fi
+
+# subfinder
+echo ""
+program="subfinder"
+printf "\n===================================\n"
+if ! is_installed "$program"; then
+	echo "[->] Installing $program..."
+	# Comando di installazione del programma
+	# Esempio: sudo apt-get install -y "$program"
+	cd /usr/share
+	sudo apt install $1
+else
+	echo "[i] $program is already installed."
+fi
+
+# shodanx
+echo ""
+program="shodanx"
+printf "\n===================================\n"
+if ! is_installed "$program"; then
+	echo "[->] Installing $program..."
+	# Comando di installazione del programma
+	# Esempio: sudo apt-get install -y "$program"
+	pip install git+https://github.com/RevoltSecurities/ShodanX --break-system-packages  
+else
+	echo "[i] $program is already installed."
+fi
+
+# crtsh
+echo ""
+program="crtsh"
+printf "\n===================================\n"
+if ! is_installed "$program"; then
+	echo "[->] Installing $program..."	
+	sudo touch /usr/bin/crtsh
+	sudo chmod 777 /usr/bin/crtsh
+	sudo echo 'curl -s https://crt.sh/\?cn\=%.$1\&output=json | jq -r '.[].name_value' | sed 's/\*\.//g' | sort -u' > /usr/bin/crtsh
+	sudo chmod 755 /usr/bin/crtsh
+else
+	echo "[i] $program is already installed."
+fi
+
+# sublist3r
+echo ""
+program="sublist3r"
+printf "\n===================================\n"
+if ! is_installed "$program"; then
+	echo "[->] Installing $program..."
+	# Comando di installazione del programma
+	# Esempio: sudo apt-get install -y "$program"
+	cd /usr/share
+	sudo apt-get install -y $1
+else
+	echo "[i] $program is already installed."
+fi
+
+# ffuf
+echo ""
+program="ffuf"
+printf "\n===================================\n"
+if ! is_installed "$program"; then
+	echo "[->] Installing $program..."
+	# Comando di installazione del programma
+	# Esempio: sudo apt-get install -y "$program"
+	cd /usr/share
+	sudo apt-get install -y $1
+else
+	echo "[i] $program is already installed."
+fi
+
+# httprobe
+echo ""
+program="httprobe"
+printf "\n===================================\n"
+if ! is_installed "$program"; then
+	echo "[->] Installing $program..."
+	# Comando di installazione del programma
+	# Esempio: sudo apt-get install -y "$program"
+	cd /usr/share
+	sudo apt-get install -y $1
+else
+	echo "[i] $program is already installed."
+fi
+
+
+# fff
+echo ""
+program="fff"
+printf "\n===================================\n"
+if ! is_installed "$program"; then
+	echo "[->] Installing $program..."
+	sudo go install github.com/tomnomnom/fff@latest
+	sudo cp /home/kali/go/bin/fff /usr/bin
+else
+	echo "[i] $program is already installed."
+fi
+
+# anew
+echo ""
+program="anew"
+printf "\n===================================\n"
+if ! is_installed "$program"; then
+	echo "[->] Installing $program..."
+	sudo wget https://github.com/tomnomnom/anew/releases/download/v0.1.1/anew-linux-386-0.1.1.tgz
+	sudo tar -xvf  anew-linux-386-0.1.1.tgz  
+	sudo mv anew /usr/local/bin/anew
+else
+	echo "[i] $program is already installed."
+fi
+
+
 # Ricava la cartella in cui si trova lo script (bash)
 myPath="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Crea la cartella appo dentro myPath senza errori se esiste già
 mkdir -p "$myPath/appo"
 
-
 ### amass
+echo ""
 if [ "$use_amass" == "yes" ]; then
   while read -r domain; do
     echo "[i] Running amass on domain: $domain"

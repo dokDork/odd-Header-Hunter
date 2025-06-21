@@ -43,13 +43,9 @@ myDomanin.ctf
 ## How to install it on Kali Linux (or Debian distribution)
 It's very simple  
 ```
-cd /opt
-sudo git clone https://github.com/dokDork/odd-Header-Hunter.git
+cd ~
+git clone https://github.com/dokDork/odd-Header-Hunter.git
 cd odd-Header-Hunter 
-sudo chown -R "$USER":"$USER" /opt/odd-Header-Hunter
-find /opt/odd-Header-Hunter -type d -exec chmod 744 {} \; 
-find /opt/odd-Header-Hunter -type f -exec chmod 744 {} \; 
-chmod 744 /opt/odd-Header-Hunter 
 sudo chmod 755 odd-header-hunter.sh 
 ./odd-header-hunter.sh 
 ```
