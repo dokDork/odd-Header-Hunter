@@ -198,7 +198,7 @@ program="fff"
 printf "\n===================================\n"
 if ! is_installed "$program"; then
 	echo "[->] Installing $program..."
-	sudo go install github.com/tomnomnom/fff@latest
+	go install github.com/tomnomnom/fff@latest
 	sudo cp /home/kali/go/bin/fff /usr/bin
 else
 	echo "[i] $program is already installed."
@@ -343,3 +343,6 @@ echo "[i] Analyze the headers of the downloaded root pages looking for odd HTTP 
 python3 "$myPath/engine/check-http-header.py" "$myPath/roots"
 mv "$myPath/engine/output-odd-headers.txt" "$myPath/output-odd-headers.txt"
 
+echo ""
+echo "analysis completed"
+echo "See you next game..."
