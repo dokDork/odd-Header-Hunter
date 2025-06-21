@@ -319,7 +319,7 @@ while read -r domain; do
   echo "[i] ffuf -H \"Host: FUZZ.\"$domain -u http://$ip -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -mc 200 -o \"$myPath/appo/ffuf-appo.txt\" -of md\""
   ffuf -H "Host: FUZZ."$domain -u http://$ip -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -mc 200 -o "$myPath/appo/ffuf-appo.txt" -of md
 done < "$domains_file"
-awk -F, 'NR>1 {gsub(/\.$/, "", $2); print $2 ~ /^https/ ? "https://" $1 "." substr($2,9) : $1 "." substr($2,8)}' ffuf-appo.txt > "$myPath/appo/ffuf-appo-clean.txt"
+awk -F, 'NR>1 {gsub(/\.$/, "", $2); print $2 ~ /^https/ ? "https://" $1 "." substr($2,9) : $1 "." substr($2,8)}' "$myPath/appo/ffuf-appo.txt" > "$myPath/appo/ffuf-appo-clean.txt"
 cat "$myPath/appo/ffuf-appo-clean.txt" | anew "$myPath/appo/domains-not-trusted.txt"
 rm "$myPath/appo/ffuf-appo-clean.txt"
 
@@ -334,8 +334,8 @@ rm -r "$myPath/appo/"
 
 ### scarico la root dei siti attivi
 echo ""
-echo "[i] I download the root page of the active sites"
-cat "$myPath/domain-trusted.txt" | fff -d 1 -S -o "$myPath/roots"
+echo "[i] I Download the root page of the active sites"
+cat "$myPath/output-domain-trusted.txt" | fff -d 1 -S -o "$myPath/roots"
 
 echo ""
 echo "[i] Analyze the headers of the downloaded root pages looking for odd HTTP headers"
