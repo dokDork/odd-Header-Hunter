@@ -52,7 +52,7 @@ if [ "$use_amass" == "yes" ]; then
     echo "[i] Executing command:"
 	echo "[i] amass enum --passive -d "$domain" -norecursive -timeout 5 -o \"$myPath/appo/amass-appo.txt\""
 	amass enum --passive -d "$domain" -norecursive -timeout 5 -o "$myPath/appo/amass-appo.txt"
-  done < wildcards.txt
+  done < "$domains_file"
   # pulisco l'output di amass
   mv "$myPath/appo/amass-appo.txt" "$myPath/appo/amass-appo.tmp"
   cat "$myPath/appo/amass-appo.tmp" | sed 's/\x1b\[[0-9;]*m//g' | grep -oE '[a-zA-Z0-9.-]+\.linkedin\.com' | sort -u > "$myPath/appo/amass-appo.txt"
@@ -76,8 +76,8 @@ cat "$domains_file" | assetfinder --subs-only | anew "$myPath/appo/domains-not-t
 echo ""
 echo "[i] Running findomain on all domains defined in $domains_file"
 echo "[i] Executing command:"
-echo "[i] findomain -f wildcards.txt | anew \"$myPath/appo/domains-not-trusted.txt\""
-findomain -f wildcards.txt | anew "$myPath/appo/domains-not-trusted.txt"
+echo "[i] findomain -f \"$domains_file\" | anew \"$myPath/appo/domains-not-trusted.txt\""
+findomain -f "$domains_file" | anew "$myPath/appo/domains-not-trusted.txt"
 ### pulisco l'output di findomain
 grep -v -E '^(Target|Search|Job finished|Good luck|Rate limit)|^$|A error has occurred' "$myPath/appo/domains-not-trusted.txt" > "$myPath/appo/domains.tmp" && mv "$myPath/appo/domains.tmp" "$myPath/appo/domains-not-trusted.txt" 
 
@@ -89,7 +89,7 @@ while read -r domain; do
   echo "[i] Running subfinder on domain: $domain"
   echo "[i] subfinder -d "$domain" -o \"$myPath/appo/subfinder-appo.txt\""
   subfinder -d "$domain" -o "$myPath/appo/subfinder-appo.txt" 
-done < wildcards.txt
+done < "$domains_file"
 cat "$myPath/appo/subfinder-appo.txt" | anew "$myPath/appo/domains-not-trusted.txt"
 rm "$myPath/appo/subfinder-appo.txt"
 
@@ -101,7 +101,7 @@ while read -r domain; do
   echo "[i] Running shodanx on domain: $domain"
   echo "[i] shodanx subdomain -d \"$domain\" -o \"$myPath/appo/shodan-appo.txt\""
   shodanx subdomain -d "$domain" -o "$myPath/appo/shodan-appo.txt" 
-done < wildcards.txt
+done < "$domains_file"
 cat "$myPath/appo/shodan-appo.txt" | anew "$myPath/appo/domains-not-trusted.txt"
 rm "$myPath/appo/shodan-appo.txt"
 
@@ -113,7 +113,7 @@ while read -r domain; do
   echo "[i] Running crt.sh on domain: $domain"
   echo "[i] crtsh \"$domain\" >> \"$myPath/appo/crt-appo.txt\""
   crtsh "$domain" >> "$myPath/appo/crt-appo.txt"
-done < wildcards.txt
+done < "$domains_file"
 cat "$myPath/appo/crt-appo.txt" | anew "$myPath/appo/domains-not-trusted.txt"
 rm crt-appo.txt
 
@@ -125,7 +125,7 @@ while read -r domain; do
   echo "[i] Running sublist3r.sh on domain: $domain"
   echo "[i] sublist3r -d \"$domain\" -o \"$myPath/appo/sublist3r-appo.txt\""
   sublist3r -d "$domain" -o "$myPath/appo/sublist3r-appo.txt"
-done < wildcards.txt
+done < "$domains_file"
 cat "$myPath/appo/sublist3r-appo.txt" | anew "$myPath/appo/domains-not-trusted.txt"
 rm "$myPath/appo/sublist3r-appo.txt"
 
@@ -138,7 +138,7 @@ while read -r domain; do
   echo "[i] Running ffuf on domain: $domain"
   echo "[i] ffuf -H \"Host: FUZZ.\"$domain -u http://$ip -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -mc 200 -o \"$myPath/appo/ffuf-appo.txt\" -of md\""
   ffuf -H "Host: FUZZ."$domain -u http://$ip -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -mc 200 -o "$myPath/appo/ffuf-appo.txt" -of md
-done < wildcards.txt
+done < "$domains_file"
 awk -F, 'NR>1 {gsub(/\.$/, "", $2); print $2 ~ /^https/ ? "https://" $1 "." substr($2,9) : $1 "." substr($2,8)}' ffuf-appo.txt > "$myPath/appo/ffuf-appo-clean.txt"
 cat "$myPath/appo/ffuf-appo-clean.txt" | anew "$myPath/appo/domains-not-trusted.txt"
 rm "$myPath/appo/ffuf-appo-clean.txt"

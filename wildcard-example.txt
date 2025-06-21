@@ -1,2 +1,1 @@
-targetDomain.ctf
-myDomain.ctf
+github.com
