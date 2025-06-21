@@ -46,6 +46,6 @@ It's very simple
 cd /opt
 sudo git clone https://github.com/dokDork/odd-Header-Hunter.git
 cd odd-Header-Hunter 
-chmod 755 odd-header-hunter.sh 
+sudo chmod 755 odd-header-hunter.sh 
 ./odd-header-hunter.sh 
 ```
