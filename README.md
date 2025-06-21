@@ -1,6 +1,6 @@
 # odd-Header-Hunter
 [![License](https://img.shields.io/badge/license-MIT-_red.svg)](https://opensource.org/licenses/MIT)  
-<img src="https://github.com/dokDork/red-team-penetration-test-script/raw/main/images/siteSniper.png" width="250" height="250">  
+<img src="https://github.com/dokDork/odd-header-hunter/raw/main/images/odd-header-hunter.png" width="250" height="250">  
   
 ## Description
 The tool is essential for bug bounty.
