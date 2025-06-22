@@ -89,7 +89,7 @@ if ! is_installed "$program"; then
 	# Comando di installazione del programma
 	# Esempio: sudo apt-get install -y "$program"
 	cd /usr/share
-	sudo apt-get install $1
+	sudo apt-get install -y $program
 else
 	echo "[i] $program is already installed."
 fi
@@ -103,7 +103,7 @@ if ! is_installed "$program"; then
 	# Comando di installazione del programma
 	# Esempio: sudo apt-get install -y "$program"
 	cd /usr/share
-	sudo apt-get install -y $1
+	sudo apt-get install -y $program
 else
 	echo "[i] $program is already installed."
 fi
@@ -145,7 +145,7 @@ if ! is_installed "$program"; then
 	# Comando di installazione del programma
 	# Esempio: sudo apt-get install -y "$program"
 	cd /usr/share
-	sudo apt install $1
+	sudo apt install -y $program
 else
 	echo "[i] $program is already installed."
 fi
@@ -186,7 +186,7 @@ if ! is_installed "$program"; then
 	# Comando di installazione del programma
 	# Esempio: sudo apt-get install -y "$program"
 	cd /usr/share
-	sudo apt-get install -y $1
+	sudo apt-get install -y $program
 else
 	echo "[i] $program is already installed."
 fi
@@ -200,7 +200,7 @@ if ! is_installed "$program"; then
 	# Comando di installazione del programma
 	# Esempio: sudo apt-get install -y "$program"
 	cd /usr/share
-	sudo apt-get install -y $1
+	sudo apt-get install -y $program
 else
 	echo "[i] $program is already installed."
 fi
@@ -214,7 +214,7 @@ if ! is_installed "$program"; then
 	# Comando di installazione del programma
 	# Esempio: sudo apt-get install -y "$program"
 	cd /usr/share
-	sudo apt-get install -y $1
+	sudo apt-get install -y $program
 else
 	echo "[i] $program is already installed."
 fi

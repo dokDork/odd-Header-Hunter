@@ -49,3 +49,8 @@ cd odd-Header-Hunter
 sudo chmod 755 odd-header-hunter.sh 
 ./odd-header-hunter.sh 
 ```
+Aftfer this, the first time you use the tool, run an apt update to install all the necessary tools
+```
+sudo apt-get update 
+./odd-header-hunter wildcard-example.txt no
+```
