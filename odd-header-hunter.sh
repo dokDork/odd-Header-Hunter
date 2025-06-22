@@ -53,6 +53,9 @@ Example:
 EOF
 }
 
+# Ricava la cartella in cui si trova lo script (bash)
+myPath="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 # Check if two arguments are passed
 if [ $# -ne 2 ]; then
   echo "Error: Missing parameters."
@@ -88,7 +91,6 @@ if ! is_installed "$program"; then
 	echo "[->] Installing $program..."
 	# Comando di installazione del programma
 	# Esempio: sudo apt-get install -y "$program"
-	cd /usr/share
 	sudo apt-get install -y $program
 else
 	echo "[i] $program is already installed."
@@ -102,7 +104,6 @@ if ! is_installed "$program"; then
 	echo "[->] Installing $program..."
 	# Comando di installazione del programma
 	# Esempio: sudo apt-get install -y "$program"
-	cd /usr/share
 	sudo apt-get install -y $program
 else
 	echo "[i] $program is already installed."
@@ -116,7 +117,6 @@ if ! is_installed "$program"; then
 	echo "[->] Installing $program..."
 	# Comando di installazione del programma
 	# Esempio: sudo apt-get install -y "$program"
-	cd /usr/share
 	sudo apt-get install -y $program
 else
 	echo "[i] $program is already installed."
@@ -144,7 +144,6 @@ if ! is_installed "$program"; then
 	echo "[->] Installing $program..."
 	# Comando di installazione del programma
 	# Esempio: sudo apt-get install -y "$program"
-	cd /usr/share
 	sudo apt-get install -y $program
 else
 	echo "[i] $program is already installed."
@@ -158,7 +157,6 @@ if ! is_installed "$program"; then
 	echo "[->] Installing $program..."
 	# Comando di installazione del programma
 	# Esempio: sudo apt-get install -y "$program"
-	cd /usr/share
 	sudo apt install -y $program
 else
 	echo "[i] $program is already installed."
@@ -199,7 +197,6 @@ if ! is_installed "$program"; then
 	echo "[->] Installing $program..."
 	# Comando di installazione del programma
 	# Esempio: sudo apt-get install -y "$program"
-	cd /usr/share
 	sudo apt-get install -y $program
 else
 	echo "[i] $program is already installed."
@@ -213,7 +210,6 @@ if ! is_installed "$program"; then
 	echo "[->] Installing $program..."
 	# Comando di installazione del programma
 	# Esempio: sudo apt-get install -y "$program"
-	cd /usr/share
 	sudo apt-get install -y $program
 else
 	echo "[i] $program is already installed."
@@ -227,7 +223,6 @@ if ! is_installed "$program"; then
 	echo "[->] Installing $program..."
 	# Comando di installazione del programma
 	# Esempio: sudo apt-get install -y "$program"
-	cd /usr/share
 	sudo apt-get install -y $program
 else
 	echo "[i] $program is already installed."
