@@ -108,6 +108,20 @@ else
 	echo "[i] $program is already installed."
 fi
 
+# golang-go
+echo ""
+program="golang-go"
+printf "\n===================================\n"
+if ! is_installed "$program"; then
+	echo "[->] Installing $program..."
+	# Comando di installazione del programma
+	# Esempio: sudo apt-get install -y "$program"
+	cd /usr/share
+	sudo apt-get install -y $program
+else
+	echo "[i] $program is already installed."
+fi
+
 # assetfinder
 echo ""
 program="assetfinder"
@@ -130,8 +144,8 @@ if ! is_installed "$program"; then
 	echo "[->] Installing $program..."
 	# Comando di installazione del programma
 	# Esempio: sudo apt-get install -y "$program"
-	go install github.com/Edu4rdSHL/findomain/v2@latest
-	sudo cp /home/kali/go/bin/findomain /usr/bin
+	cd /usr/share
+	sudo apt-get install -y $program
 else
 	echo "[i] $program is already installed."
 fi
