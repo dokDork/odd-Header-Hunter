@@ -133,6 +133,8 @@ def scan_headers_files(standard_headers):
                             non_standard_found = True
 
                     if non_standard_found:
+                        outf.write("\n")
+                        outf.write("\n")                        
                         outf.write(f"--- File: {filepath} ---\n")
                         outf.writelines(marked_lines)
                         outf.write("\n")

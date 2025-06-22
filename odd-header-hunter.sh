@@ -368,7 +368,7 @@ echo "[i] Check which hosts are actually active"
 cat "$myPath/appo/domains-not-trusted.txt" | httprobe -c 50 | anew "$myPath/output-domain-trusted.txt"
 
 ### Cancello la cartella di appoggio
-rm -r "$myPath/appo/"
+sudo rm -r "$myPath/appo/"
 
 ### scarico la root dei siti attivi
 echo ""
