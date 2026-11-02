@@ -60,3 +60,5 @@ Aftfer this, the first time you use the tool, run an apt update to install all t
 sudo apt-get update 
 ./odd-header-hunter.sh wildcard-example.txt no
 ```
+---
+Author: Luigi Capuzzello (dokDork) · [Website](https://capuzzello.altervista.org/) · [LinkedIn](https://www.linkedin.com/in/luigi-capuzzello/)
